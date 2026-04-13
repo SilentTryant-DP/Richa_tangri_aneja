@@ -1,1199 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover Richa Aneja's awards and recognition - from Indian Idol Top 10 to prestigious national accolades and educational honors.">
-    <meta name="keywords" content="Richa Aneja awards, Indian Idol finalist, recognition, music awards, national anthem record">
-    <meta property="og:title" content="Awards & Recognition - Richa Aneja">
-    <meta property="og:description" content="A celebration of Richa Aneja's achievements and accolades in music performance and education.">
-    
-    <title>Awards & Recognition - Richa Aneja</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Page-specific styles for Awards */
-        
-        .page-header {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            color: white;
-            padding: 80px var(--spacing-unit);
-            text-align: center;
-        }
-
-        .page-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .page-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* Carousel Section */
-        .carousel-section {
-            padding: 60px var(--spacing-unit);
-            background-color: #f8f9fa;
-        }
-
-        .carousel-container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .carousel-slide {
-            display: none;
-            width: 100%;
-            position: relative;
-        }
-
-        .carousel-slide.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Carousel Navigation */
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .carousel-btn {
-            pointer-events: all;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .carousel-btn:hover {
-            background: rgba(0, 0, 0, 0.8);
-            transform: scale(1.1);
-        }
-
-        /* Carousel Indicators */
-        .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 0 10px;
-            z-index: 10;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            padding: 0;
-        }
-
-        .carousel-dot.active {
-            background: white;
-            width: 30px;
-            border-radius: 6px;
-        }
-
-        /* Awards Section */
-        .awards-section {
-            padding: 60px var(--spacing-unit);
-            background-color: white;
-        }
-
-        .awards-section:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .award-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-        }
-
-        .award-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .award-card.reverse {
-            direction: rtl;
-        }
-
-        .award-card.reverse > * {
-            direction: ltr;
-        }
-
-        .award-content {
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .award-content h3 {
-            font-size: 1.8rem;
-            color: #0072ff;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .award-content p {
-            color: #666;
-            line-height: 1.8;
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        .award-media {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            min-height: 350px;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .award-media iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Highlights Section */
-        .highlights-section {
-            padding: 60px var(--spacing-unit);
-            background: linear-gradient(135deg, rgba(0, 198, 255, 0.1), rgba(0, 114, 255, 0.1));
-        }
-
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .highlight-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 4px solid #00c6ff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .highlight-card h4 {
-            color: #0072ff;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
-
-        .highlight-card p {
-            color: #666;
-            line-height: 1.6;
-            margin: 0;
-            font-size: 0.95rem;
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            padding: 60px var(--spacing-unit);
-            background-color: #f8f9fa;
-        }
-
-        .gallery-section h2 {
-            font-size: 2rem;
-            color: #0072ff;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            aspect-ratio: 3 / 4;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 114, 255, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            color: white;
-            font-size: 14px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content-gallery {
-            position: relative;
-            margin: 0 auto;
-            padding: 20px;
-            width: 90%;
-            max-width: 900px;
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: #00c6ff;
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 60px var(--spacing-unit);
-            text-align: center;
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            color: white;
-        }
-
-        .cta h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .cta p {
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta .btn {
-            padding: 12px 40px;
-            font-size: 1rem;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .cta .btn:hover {
-            background: white;
-            color: #0072ff;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .award-card {
-                grid-template-columns: 1fr;
-            }
-
-            .award-media {
-                min-height: 300px;
-                order: -1;
-            }
-
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .page-header {
-                padding: 40px var(--spacing-unit);
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .award-card {
-                grid-template-columns: 1fr;
-            }
-
-            .award-content {
-                padding: 30px;
-            }
-
-            .award-content h3 {
-                font-size: 1.4rem;
-            }
-
-            .award-media {
-                min-height: 250px;
-            }
-
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 15px;
-            }
-
-            .gallery-item {
-                aspect-ratio: 1 / 1;
-            }
-
-            .highlights-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-
-            .modal-content-gallery {
-                height: 70vh;
-                padding: 10px;
-            }
-
-            .modal-close {
-                top: 10px;
-                right: 20px;
-                font-size: 30px;
-            }
-
-            .cta-buttons {
-                gap: 15px;
-            }
-
-            .cta .btn {
-                padding: 10px 30px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .page-header {
-                padding: 30px var(--spacing-unit);
-            }
-
-            .page-header h1 {
-                font-size: 1.5rem;
-            }
-
-            .page-header p {
-                font-size: 1rem;
-            }
-
-            .carousel-section {
-                padding: 30px var(--spacing-unit);
-            }
-
-            .carousel-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 16px;
-            }
-
-            .carousel-indicators {
-                bottom: 10px;
-                gap: 6px;
-            }
-
-            .carousel-dot {
-                width: 8px;
-                height: 8px;
-            }
-
-            .carousel-dot.active {
-                width: 20px;
-            }
-
-            .awards-section {
-                padding: 30px var(--spacing-unit);
-            }
-
-            .award-content {
-                padding: 20px;
-            }
-
-            .award-content h3 {
-                font-size: 1.2rem;
-                gap: 8px;
-            }
-
-            .award-content p {
-                font-size: 0.9rem;
-            }
-
-            .award-media {
-                min-height: 200px;
-            }
-
-            .gallery-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .gallery-item {
-                aspect-ratio: 1 / 1;
-            }
-
-            .highlight-card {
-                padding: 20px;
-            }
-
-            .highlight-card h4 {
-                font-size: 1.1rem;
-            }
-
-            .highlight-card p {
-                font-size: 0.85rem;
-            }
-
-            .cta h2 {
-                font-size: 1.3rem;
-            }
-
-            .cta p {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover Richa Aneja's awards and recognition — from Indian Idol Top 10 to prestigious national accolades.">
+  <title>Awards & Recognition — Richa Aneja</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Skip Navigation Link -->
-    <a href="#main-content" class="skip-nav">Skip to main content</a>
 
-    <!-- Navigation Header -->
-    <header class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <img src="main.jpeg" alt="Richa Aneja Logo" class="logo-img">
-                <span class="logo-text">Richa Aneja</span>
-            </div>
-            
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
 
-            <nav class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="earlylife.html" class="nav-link">Early Life</a>
-                <a href="performances.html" class="nav-link">Performances</a>
-                <a href="awards.html" class="nav-link active">Awards</a>
-                <a href="index.html#contact" class="nav-link cta-link">Contact</a>
-            </nav>
+<header class="navbar" id="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <img src="main.jpeg" alt="Richa Aneja" class="logo-img">
+      <span class="logo-text">Richa Aneja</span>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+    </button>
+    <nav class="nav-menu" id="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="earlylife.html" class="nav-link">Early Life</a>
+      <a href="performances.html" class="nav-link">Performances</a>
+      <a href="awards.html" class="nav-link active">Awards</a>
+      <a href="index.html#contact" class="nav-link cta-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">Recognition</span>
+      <h1>Awards &amp; Honours</h1>
+      <p>A Celebration of Excellence in Music</p>
+    </div>
+  </section>
+
+  <!-- AWARD CARDS -->
+  <section class="awards-section">
+    <div class="container">
+      <span class="section-label">Accolades</span>
+      <h2 class="section-title">Her <em>Achievements</em></h2>
+      <div class="divider"></div>
+
+      <div class="awards-grid">
+        <div class="award-card reveal">
+          <div class="award-icon">🌟</div>
+          <h3>Indian Idol Season 3 — Top 10 Finalist</h3>
+          <span class="award-year">National TV · 2006</span>
+          <p>Selected among the Top 10 contestants nationwide on India's most prestigious vocal competition, captivating audiences and judges alike with her soulful classical voice.</p>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="container">
-                <h1>🏆 Awards & Recognition</h1>
-                <p>A Legacy of Excellence and Inspiration</p>
-            </div>
-        </section>
-
-        <!-- Carousel Section -->
-        <section class="carousel-section">
-            <div class="container">
-                <div class="carousel-container">
-                    <!-- Slides -->
-                    <div class="carousel-slide active">
-                        <img src="images/IMG-20250806-WA0004.jpg" alt="Award recognition 1">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0007.jpg" alt="Award recognition 2">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0009.jpg" alt="Award recognition 3">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0017.jpg" alt="Award recognition 4">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0018.jpg" alt="Award recognition 5">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0019.jpg" alt="Award recognition 6">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0021.jpg" alt="Award recognition 7">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0024.jpg" alt="Award recognition 8">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0030.jpg" alt="Award recognition 9">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0033.jpg" alt="Award recognition 10">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0034.jpg" alt="Award recognition 11">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0037.jpg" alt="Award recognition 12">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0041.jpg" alt="Award recognition 13">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0042.jpg" alt="Award recognition 14">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0044.jpg" alt="Award recognition 15">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0047.jpg" alt="Award recognition 16">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0049.jpg" alt="Award recognition 17">
-                    </div>
-
-                    <!-- Navigation -->
-                    <div class="carousel-nav">
-                        <button class="carousel-btn" aria-label="Previous slide" onclick="changeSlide(-1)">❮</button>
-                        <button class="carousel-btn" aria-label="Next slide" onclick="changeSlide(1)">❯</button>
-                    </div>
-
-                    <!-- Indicators -->
-                    <div class="carousel-indicators">
-                        <button class="carousel-dot active" onclick="currentSlide(1)" aria-label="Go to slide 1"></button>
-                        <button class="carousel-dot" onclick="currentSlide(2)" aria-label="Go to slide 2"></button>
-                        <button class="carousel-dot" onclick="currentSlide(3)" aria-label="Go to slide 3"></button>
-                        <button class="carousel-dot" onclick="currentSlide(4)" aria-label="Go to slide 4"></button>
-                        <button class="carousel-dot" onclick="currentSlide(5)" aria-label="Go to slide 5"></button>
-                        <button class="carousel-dot" onclick="currentSlide(6)" aria-label="Go to slide 6"></button>
-                        <button class="carousel-dot" onclick="currentSlide(7)" aria-label="Go to slide 7"></button>
-                        <button class="carousel-dot" onclick="currentSlide(8)" aria-label="Go to slide 8"></button>
-                        <button class="carousel-dot" onclick="currentSlide(9)" aria-label="Go to slide 9"></button>
-                        <button class="carousel-dot" onclick="currentSlide(10)" aria-label="Go to slide 10"></button>
-                        <button class="carousel-dot" onclick="currentSlide(11)" aria-label="Go to slide 11"></button>
-                        <button class="carousel-dot" onclick="currentSlide(12)" aria-label="Go to slide 12"></button>
-                        <button class="carousel-dot" onclick="currentSlide(13)" aria-label="Go to slide 13"></button>
-                        <button class="carousel-dot" onclick="currentSlide(14)" aria-label="Go to slide 14"></button>
-                        <button class="carousel-dot" onclick="currentSlide(15)" aria-label="Go to slide 15"></button>
-                        <button class="carousel-dot" onclick="currentSlide(16)" aria-label="Go to slide 16"></button>
-                        <button class="carousel-dot" onclick="currentSlide(17)" aria-label="Go to slide 17"></button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Award 1: Indian Idol -->
-        <section class="awards-section">
-            <div class="container">
-                <div class="award-card">
-                    <div class="award-content">
-                        <h3>🎤 Indian Idol Season 3 - Top 10 Finalist</h3>
-                        <p>Richa Aneja's journey on Indian Idol Season 3 was nothing short of extraordinary. At just 16 years old, she captivated millions across the nation with her soulful renditions and emotional depth. Her performances resonated with judges and audiences alike, earning her a prestigious spot among the top 10 finalists. This national platform not only showcased her extraordinary vocal talent but also introduced her to audiences across India, establishing her as a rising star in the music industry.</p>
-                    </div>
-                    <div class="award-media">
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Lr7G0-H6xSc?si=FFe6KQO1rFoo1zSC" title="Indian Idol Performance" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Award 2: National Anthem Record -->
-        <section class="awards-section" style="background-color: #f8f9fa;">
-            <div class="container">
-                <div class="award-card reverse">
-                    <div class="award-media">
-                        <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/pcRIks2ZKEw?si=MKDEz6FbAc0UsZh0" title="National Anthem Record" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </div>
-                    <div class="award-content">
-                        <h3>In Indian Book of Records - National Anthem Achievement</h3>
-                        <p>On January 26, 2021, Richa received a historic commendation from the Indian Book of Records for her participation in a groundbreaking national achievement: singing the Indian National Anthem simultaneously with 99,325 people from different locations across the country. This award, adjudicated by a Supreme Court advocate, celebrates not only her musical excellence but also her unwavering commitment to national pride, unity, and patriotism. It stands as a testament to her belief in the power of music to unite people across boundaries.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-         <!-- Key Achievements -->
-        <section class="highlights-section">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 50px; color: #0072ff;">Key Achievements & Recognitions</h2>
-                <div class="highlights-grid">
-                    <div class="highlight-card">
-                        <h4>🏆 Indian Idol Season 3</h4>
-                        <p>Top 10 finalist at age 16, captivating millions with soulful renditions on India's biggest singing platform.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h4>📚 Indian Book of Records</h4>
-                        <p>Historic commendation for participation in largest simultaneous national anthem singing with 99,325 voices.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h4>🎓 Academic Excellence</h4>
-                        <p>Top honors in Bachelor's in Music (Vocal) and Master's in Performing Arts, blending academics with artistry.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h4>👨‍🏫 Music Education</h4>
-                        <p>Assistant Professor of Music (Vocal), recognized for excellence in mentoring and music pedagogy.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h4>🎭 Theatre Recognition</h4>
-                        <p>Featured in prestigious theatre productions including Kudesan, Rihayee, and Jasma Odhan.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h4>🌟 Festival Triumphs</h4>
-                        <p>Top honors and standing ovations at youth festivals, university competitions, and national cultural showcases.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Awards Journey Section -->
-        <section class="awards-section">
-            <div class="container">
-                <h2 style="color: #0072ff; margin-bottom: 30px;">📜 The Journey of Recognition</h2>
-                <p style="font-size: 1.05rem; line-height: 1.8; color: #666; margin-bottom: 25px;">
-                    Over the years, Richa Aneja has not only captivated audiences with her soulful voice but has also earned accolades that reflect her unwavering dedication to the art of music. Each award she holds is more than a trophy—it's a testament to the passion, discipline, and artistry that define her career. Whether earning state commendations for her performances, institutional awards for her teaching excellence, or recognition from national records bodies, Richa's achievements paint a picture of an artist committed to both personal excellence and community uplift.
-                </p>
-                <p style="font-size: 1.05rem; line-height: 1.8; color: #666;">
-                    As an Assistant Professor of Music (Vocal), she has been recognized for her contributions to classical and contemporary music education, mentoring countless students with grace and precision. Her recognition extends beyond the stage—it echoes in the lives of her students, in the hearts of her audience members, and in the cultural landscape of Indian classical music. Every note she sings and every life she inspires carries forward the legacy of excellence that her awards represent.
-                </p>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section class="gallery-section">
-            <div class="container">
-                <h2>📸 Awards Gallery</h2>
-                <div class="gallery-container">
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0004.jpg')">
-                        <img src="images/IMG-20250806-WA0004.jpg" alt="Award gallery 1">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0007.jpg')">
-                        <img src="images/IMG-20250806-WA0007.jpg" alt="Award gallery 2">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0009.jpg')">
-                        <img src="images/IMG-20250806-WA0009.jpg" alt="Award gallery 3">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0017.jpg')">
-                        <img src="images/IMG-20250806-WA0017.jpg" alt="Award gallery 4">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0018.jpg')">
-                        <img src="images/IMG-20250806-WA0018.jpg" alt="Award gallery 5">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0019.jpg')">
-                        <img src="images/IMG-20250806-WA0019.jpg" alt="Award gallery 6">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0021.jpg')">
-                        <img src="images/IMG-20250806-WA0021.jpg" alt="Award gallery 7">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0024.jpg')">
-                        <img src="images/IMG-20250806-WA0024.jpg" alt="Award gallery 8">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0030.jpg')">
-                        <img src="images/IMG-20250806-WA0030.jpg" alt="Award gallery 9">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0033.jpg')">
-                        <img src="images/IMG-20250806-WA0033.jpg" alt="Award gallery 10">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0034.jpg')">
-                        <img src="images/IMG-20250806-WA0034.jpg" alt="Award gallery 11">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0037.jpg')">
-                        <img src="images/IMG-20250806-WA0037.jpg" alt="Award gallery 12">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/IMG-20250806-WA0041.jpg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/IMG-20250806-WA0042.jpg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/IMG-20250806-WA0044.jpg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/IMG-20250806-WA0047.jpg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/IMG-20250806-WA0049.jpg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-               <section class="gallery-section">
-            <div class="container">
-                <h2>📸 Awards Gallery</h2>
-                <div class="gallery-container">
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0004.jpg')">
-                        <img src="images/imag1 (1).jpeg" alt="Award gallery 1">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0007.jpg')">
-                        <img src="images/imag1 (2).jpeg" alt="Award gallery 2">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0009.jpg')">
-                        <img src="images/imag1 (3).jpeg" alt="Award gallery 3">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0017.jpg')">
-                        <img src="images/imag1 (4).jpeg" alt="Award gallery 4">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0018.jpg')">
-                        <img src="images/imag1 (5).jpeg" alt="Award gallery 5">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0019.jpg')">
-                        <img src="images/imag1 (6).jpeg" alt="Award gallery 6">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0021.jpg')">
-                        <img src="images/imag1 (7).jpeg" alt="Award gallery 7">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0024.jpg')">
-                        <img src="images/imag1 (8).jpeg" alt="Award gallery 8">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0030.jpg')">
-                        <img src="images/imag1 (9).jpeg" alt="Award gallery 9">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0033.jpg')">
-                        <img src="images/imag1 (10).jpeg" alt="Award gallery 10">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0034.jpg')">
-                        <img src="images/imag1 (11).jpeg" alt="Award gallery 11">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0037.jpg')">
-                        <img src="images/imag1 (12).jpeg" alt="Award gallery 12">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (12).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (14).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (15).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (13).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (16).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (17).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (18).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (19).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (20).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (21).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (22).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (23).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (24).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (25).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (26).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (27).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (28).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (29).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (30).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (31).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (32).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (33).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (34).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (37).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (36).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (38).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (37).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (39).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (40).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (41).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (42).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (43).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (44).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (45).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (46).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0041.jpg')">
-                        <img src="images/imag1 (47).jpeg" alt="Award gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0042.jpg')">
-                        <img src="images/imag1 (48).jpeg" alt="Award gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0044.jpg')">
-                        <img src="images/imag1 (49).jpeg" alt="Award gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0047.jpg')">
-                        <img src="images/imag1 (50).jpeg" alt="Award gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0049.jpg')">
-                        <img src="images/imag1 (51).jpeg" alt="Award gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Modal for Gallery -->
-        <div id="galleryModal" class="modal">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div class="modal-content-gallery">
-                <img id="modalImage" class="modal-image" src="" alt="Full screen gallery image">
-            </div>
+        <div class="award-card reveal reveal-delay-1">
+          <div class="award-icon">🏆</div>
+          <h3>Harivallabh Sangeet Sammelan — Winner</h3>
+          <span class="award-year">Classical Music · Punjab</span>
+          <p>Won at the prestigious Harivallabh Sangeet Sammelan, one of the most respected classical music gatherings in North India, a testament to her exceptional mastery of the art.</p>
         </div>
-
-        <!-- CTA Section -->
-        <section class="cta">
-            <div class="container">
-                <h2>Connect with Richa</h2>
-                <p>Interested in booking Richa for your event or learning more about her work?</p>
-                <div class="cta-buttons">
-                    <a href="index.html#booking" class="btn">Book a Performance</a>
-                    <a href="index.html#contact" class="btn">Get In Touch</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About Richa Aneja</h4>
-                    <p>Award-winning vocalist, Indian Idol Top 10 finalist, and music educator dedicated to preserving and promoting Indian classical music.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="earlylife.html">Early Life</a></li>
-                        <li><a href="performances.html">Performances</a></li>
-                        <li><a href="awards.html">Awards</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow</h4>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-                        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email <a href="mailto:kapil955@gmail.com">us to connect</a></p>
-                    <p>Phone: <a href="tel:+918847217406">+91 88472 17406</a></p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Richa Aneja. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-            </div>
+        <div class="award-card reveal reveal-delay-2">
+          <div class="award-icon">👩</div>
+          <h3>Women of the Year</h3>
+          <span class="award-year">Dainik Bhaskar Award</span>
+          <p>Honoured with the prestigious Women of the Year award by Dainik Bhaskar, one of India's largest circulated newspapers, in recognition of her outstanding contribution to Indian music.</p>
         </div>
-    </footer>
+        <div class="award-card reveal">
+          <div class="award-icon">🎓</div>
+          <h3>Ministry of Culture Scholarship</h3>
+          <span class="award-year">Govt. of India · Semi-Classical Music</span>
+          <p>Awarded a coveted scholarship in Semi-Classical Music by the Ministry of Culture, Government of India — a recognition of excellence given to the country's most promising musicians.</p>
+        </div>
+        <div class="award-card reveal reveal-delay-1">
+          <div class="award-icon">🎖️</div>
+          <h3>Indian Council of Art &amp; Literature Award</h3>
+          <span class="award-year">National Recognition</span>
+          <p>Received the prestigious Indian Council of Art and Literature Award, recognising her significant and lasting contribution to preserving and promoting classical and devotional music traditions.</p>
+        </div>
+        <div class="award-card reveal reveal-delay-2">
+          <div class="award-icon">🏅</div>
+          <h3>Inter-University Winner — Ghazal &amp; Bhajan</h3>
+          <span class="award-year">University Competition</span>
+          <p>Won the Inter-University competition in both Ghazal and Bhajan Gayaki categories, showcasing her extraordinary range across the semi-classical and devotional music traditions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
-    <script>
-        let currentSlideIndex = 1;
+  <!-- FEATURED CAROUSEL -->
+  <section class="carousel-section">
+    <div class="container">
+      <span class="section-label">Award Moments</span>
+      <h2 class="section-title">Award <em>Gallery</em></h2>
+      <div class="divider"></div>
+      <div class="perf-carousel" style="position:relative;">
+        <div class="perf-slide active"><img src="images/imag1 (1).jpeg" alt="Award ceremony"></div>
+        <div class="perf-slide"><img src="images/imag1 (2).jpeg" alt="Award ceremony"></div>
+        <div class="perf-slide"><img src="images/imag1 (3).jpeg" alt="Award ceremony"></div>
+        <div class="perf-slide"><img src="images/imag1 (4).jpeg" alt="Award ceremony"></div>
+        <div class="perf-slide"><img src="images/imag1 (5).jpeg" alt="Award ceremony"></div>
+        <div class="perf-nav">
+          <button class="perf-btn" onclick="perfChangeSlide(-1)" aria-label="Previous">&#10094;</button>
+          <button class="perf-btn" onclick="perfChangeSlide(1)" aria-label="Next">&#10095;</button>
+        </div>
+      </div>
+      <div class="perf-dots">
+        <button class="perf-dot active" onclick="perfCurrentSlide(1)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(2)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(3)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(4)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(5)"></button>
+      </div>
+    </div>
+  </section>
 
-        function changeSlide(n) {
-            showSlide(currentSlideIndex += n);
-        }
+  <!-- PHOTO GALLERY -->
+  <section class="gallery-section">
+    <div class="container">
+      <span class="section-label">More Moments</span>
+      <h2 class="section-title">Awards <em>Gallery</em></h2>
+      <div class="divider"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-full="images/imag1 (6).jpeg"><img src="images/imag1 (6).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (7).jpeg"><img src="images/imag1 (7).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (8).jpeg"><img src="images/imag1 (8).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (9).jpeg"><img src="images/imag1 (9).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (10).jpeg"><img src="images/imag1 (10).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (11).jpeg"><img src="images/imag1 (11).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (12).jpeg"><img src="images/imag1 (12).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (13).jpeg"><img src="images/imag1 (13).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (14).jpeg"><img src="images/imag1 (14).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (15).jpeg"><img src="images/imag1 (15).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (16).jpeg"><img src="images/imag1 (16).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (17).jpeg"><img src="images/imag1 (17).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (18).jpeg"><img src="images/imag1 (18).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (19).jpeg"><img src="images/imag1 (19).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (20).jpeg"><img src="images/imag1 (20).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (21).jpeg"><img src="images/imag1 (21).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (22).jpeg"><img src="images/imag1 (22).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/imag1 (23).jpeg"><img src="images/imag1 (23).jpeg" alt="Award"><div class="gallery-overlay"><span>View</span></div></div>
+      </div>
+    </div>
+  </section>
 
-        function currentSlide(n) {
-            showSlide(currentSlideIndex = n);
-        }
+  <section class="cta">
+    <div class="container" style="position:relative;z-index:1;text-align:center;">
+      <span class="section-label">Connect</span>
+      <h2 class="section-title" style="color:var(--ivory);">Connect with <em style="color:var(--gold-light);">Richa</em></h2>
+      <p style="color:rgba(253,248,240,0.65);margin-bottom:40px;">Interested in booking Richa for your event or learning more about her work?</p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary" onclick="openBooking()">🎤 Book a Performance</button>
+        <button class="btn btn-secondary" onclick="openContact()">✉ Get In Touch</button>
+      </div>
+    </div>
+  </section>
 
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
+</main>
 
-            if (n > slides.length) {
-                currentSlideIndex = 1;
-            }
-            if (n < 1) {
-                currentSlideIndex = slides.length;
-            }
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Richa Aneja</h4>
+        <p>Award-winning vocalist, Indian Idol Top 10 finalist, and music educator dedicated to preserving and promoting Indian classical music.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="earlylife.html">Early Life</a></li>
+          <li><a href="performances.html">Performances</a></li>
+          <li><a href="awards.html">Awards</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow</h4>
+        <div class="social-links">
+          <a href="https://www.instagram.com/richa_aneja/" target="_blank" rel="noopener">📸 Instagram</a>
+          <a href="https://www.youtube.com/@richaanejaindianidolfame1950" target="_blank" rel="noopener">▶ YouTube</a>
+          <a href="https://www.linkedin.com/in/richa-aneja-indianidolfame-88490136a" target="_blank" rel="noopener">💼 LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p><a href="mailto:kapil955@gmail.com">kapil955@gmail.com</a></p>
+        <p><a href="tel:+918847217406">+91 88472 17406</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Richa Aneja. All rights reserved.</p>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <button class="footer-legal-btn" onclick="openLegal('privacy')">Privacy Policy</button>
+        <span style="color:rgba(253,248,240,0.2);">|</span>
+        <button class="footer-legal-btn" onclick="openLegal('terms')">Terms of Service</button>
+      </div>
+    </div>
+  </div>
+</footer>
 
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-            dots.forEach(dot => {
-                dot.classList.remove('active');
-            });
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close" onclick="closeContact()" aria-label="Close">×</button>
+    <h2>Get In Touch</h2>
+    <span class="modal-subtitle">We'd love to hear from you</span>
+    <div id="contactSuccess" class="form-success"><div class="success-icon">✉️</div><h3>Message Sent!</h3><p>Thank you! We'll get back to you within 24 hours.</p></div>
+    <form id="contactForm" novalidate>
+      <div class="form-group" id="fg-name"><label for="c-name">Name</label><input type="text" id="c-name" name="name" placeholder="Your name" required><span class="error-msg">Please enter your name</span></div>
+      <div class="form-group" id="fg-email"><label for="c-email">Email</label><input type="email" id="c-email" name="email" placeholder="your@email.com" required><span class="error-msg">Please enter a valid email</span></div>
+      <div class="form-group" id="fg-message"><label for="c-message">Message</label><textarea id="c-message" name="message" placeholder="How can we help?" required></textarea><span class="error-msg">Please enter a message</span></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+    </form>
+  </div>
+</div>
 
-            slides[currentSlideIndex - 1].classList.add('active');
-            dots[currentSlideIndex - 1].classList.add('active');
-        }
+<!-- BOOKING MODAL -->
+<div id="bookingModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close" onclick="closeBooking()" aria-label="Close">×</button>
+    <h2>Book a Performance</h2>
+    <span class="modal-subtitle">Tell us about your event</span>
+    <div id="bookingSuccess" class="form-success"><div class="success-icon">🎤</div><h3>Request Sent!</h3><p>We'll confirm availability within 48 hours.</p></div>
+    <form id="bookingForm" novalidate>
+      <div class="form-group" id="fg-bname"><label for="b-name">Name</label><input type="text" id="b-name" name="name" placeholder="Your name" required><span class="error-msg">Please enter your name</span></div>
+      <div class="form-group" id="fg-bemail"><label for="b-email">Email</label><input type="email" id="b-email" name="email" placeholder="your@email.com" required><span class="error-msg">Please enter a valid email</span></div>
+      <div class="form-group" id="fg-event"><label for="b-event">Event Type</label><input type="text" id="b-event" name="event" placeholder="Wedding, Festival..." required><span class="error-msg">Please enter the event type</span></div>
+      <div class="form-group" id="fg-date"><label for="b-date">Preferred Date</label><input type="date" id="b-date" name="date" required><span class="error-msg">Please select a date</span></div>
+      <div class="form-group" id="fg-venue"><label for="b-venue">Venue</label><input type="text" id="b-venue" name="venue" placeholder="City, Venue name..." required><span class="error-msg">Please enter the venue</span></div>
+      <div class="form-group"><label for="b-details">Details</label><textarea id="b-details" name="details" placeholder="Audience size, duration, requirements..."></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Submit Booking Request</button>
+    </form>
+  </div>
+</div>
 
-        function openModal(imageSrc) {
-            const modal = document.getElementById('galleryModal');
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = imageSrc;
-            modal.style.display = 'block';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('galleryModal');
-            modal.style.display = 'none';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('galleryModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
-            if (e.key === 'Escape') closeModal();
-        });
-    </script>
+<div id="legalModal" class="legal-modal" role="dialog" aria-modal="true">
+  <div class="legal-content">
+    <button class="close" onclick="closeLegal()" aria-label="Close" style="position:absolute;top:16px;right:20px;">×</button>
+    <div id="legalInner"></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="alert"></div>
+<script src="script.js"></script>
 </body>
 </html>

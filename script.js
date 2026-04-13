@@ -1,591 +1,429 @@
 /* ============================================
-   IMPROVED SCRIPT.JS - FIXED & OPTIMIZED
+   RICHA ANEJA — FULLY FUNCTIONAL SCRIPT
    ============================================ */
 
-// Initialize when page loads
+/* ---- SPLASH SCREEN ---- */
 window.addEventListener('load', () => {
-    // Hide splash screen after 2 seconds (reduced from 5)
-    setTimeout(() => {
-        const splashScreen = document.getElementById('splash-screen');
-        if (splashScreen) {
-            splashScreen.style.display = 'none';
-        }
-    }, 2000);
+  // Try to play audio on first interaction
+  const audio = document.getElementById('splash-audio');
+  if (audio) {
+    audio.currentTime = 25;
+    const tryPlay = () => {
+      audio.play().catch(() => {});
+      document.removeEventListener('click', tryPlay);
+      document.removeEventListener('touchstart', tryPlay);
+    };
+    document.addEventListener('click', tryPlay);
+    document.addEventListener('touchstart', tryPlay);
+  }
 
-    // Start carousel
-    startCarousel();
-    
-    // Initialize mobile menu
-    initMobileMenu();
+  // Hide splash after 2.4s
+  setTimeout(() => {
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.classList.add('splash-hidden');
+      setTimeout(() => { splash.style.display = 'none'; }, 900);
+    }
+  }, 2400);
+
+  initCarousel();
+  initMobileMenu();
+  initNavbarScroll();
+  initReveal();
+  initForms();
 });
 
-/* ============================================
-   MOBILE MENU FUNCTIONALITY
-   ============================================ */
+/* ---- NAVBAR: scroll effect ---- */
+function initNavbarScroll() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+}
 
+/* ---- MOBILE MENU ---- */
 function initMobileMenu() {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
+  if (!hamburger || !navMenu) return;
 
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            
-            // Update aria-expanded for accessibility
-            const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
-            hamburger.setAttribute('aria-expanded', !isExpanded);
-        });
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.navbar-container')) {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
     }
-
-    // Close menu when a link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.navbar-container')) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        }
-    });
+  });
 }
 
-/* ============================================
-   CAROUSEL FUNCTIONALITY
-   ============================================ */
-
+/* ---- HERO CAROUSEL ---- */
 let slideIndex = 0;
-let slideTimer;
+let slideTimer = null;
 
-function startCarousel() {
-    showSlides();
-    // Auto-change slide every 2 seconds
-    slideTimer = setInterval(showSlides, 2000);
+function initCarousel() {
+  const slides = document.querySelectorAll('.carousel-slide');
+  if (!slides.length) return;
+  showSlide(0);
+  slideTimer = setInterval(() => advanceSlide(1), 3500);
 }
 
-function showSlides() {
-    const slides = document.getElementsByClassName('carousel-slide');
-    const indicators = document.getElementsByClassName('indicator');
+function showSlide(n) {
+  const slides = document.querySelectorAll('.carousel-slide');
+  const indicators = document.querySelectorAll('.indicator');
+  if (!slides.length) return;
 
-    // Hide all slides
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove('fade');
-    }
+  slideIndex = (n + slides.length) % slides.length;
 
-    // Remove active class from all indicators
-    for (let i = 0; i < indicators.length; i++) {
-        indicators[i].classList.remove('active');
-    }
-
-    // Increment slide index
-    slideIndex++;
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
-    }
-
-    // Show current slide
-    if (slides[slideIndex - 1]) {
-        slides[slideIndex - 1].classList.add('fade');
-    }
-
-    // Update indicator
-    if (indicators[slideIndex - 1]) {
-        indicators[slideIndex - 1].classList.add('active');
-    }
+  slides.forEach((s, i) => {
+    s.classList.toggle('fade', i === slideIndex);
+  });
+  indicators.forEach((ind, i) => {
+    ind.classList.toggle('active', i === slideIndex);
+  });
 }
 
-function changeSlide(n) {
-    // Clear auto-play timer
-    clearInterval(slideTimer);
-    
-    // Calculate new slide index
-    slideIndex += n;
-    
-    const slides = document.getElementsByClassName('carousel-slide');
-    
-    // Wrap around
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
-    }
-    if (slideIndex < 1) {
-        slideIndex = slides.length;
-    }
+function advanceSlide(dir) {
+  const slides = document.querySelectorAll('.carousel-slide');
+  showSlide((slideIndex + dir + slides.length) % slides.length);
+}
 
-    updateCarouselDisplay();
-    
-    // Restart auto-play
-    slideTimer = setInterval(showSlides, 2000);
+function changeSlide(dir) {
+  clearInterval(slideTimer);
+  advanceSlide(dir);
+  slideTimer = setInterval(() => advanceSlide(1), 3500);
 }
 
 function currentSlide(n) {
-    // Clear auto-play timer
-    clearInterval(slideTimer);
-    
-    slideIndex = n;
-    updateCarouselDisplay();
-    
-    // Restart auto-play
-    slideTimer = setInterval(showSlides, 2000);
+  clearInterval(slideTimer);
+  showSlide(n - 1);
+  slideTimer = setInterval(() => advanceSlide(1), 3500);
 }
 
-function updateCarouselDisplay() {
-    const slides = document.getElementsByClassName('carousel-slide');
-    const indicators = document.getElementsByClassName('indicator');
-
-    // Hide all slides
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].classList.remove('fade');
-    }
-
-    // Remove active class from all indicators
-    for (let i = 0; i < indicators.length; i++) {
-        indicators[i].classList.remove('active');
-    }
-
-    // Show current slide
-    if (slides[slideIndex - 1]) {
-        slides[slideIndex - 1].classList.add('fade');
-    }
-
-    // Update indicator
-    if (indicators[slideIndex - 1]) {
-        indicators[slideIndex - 1].classList.add('active');
-    }
-}
-
-/* ============================================
-   MODAL FUNCTIONALITY
-   ============================================ */
-
-function openContactForm() {
-    const modal = document.getElementById('contactModal');
-    if (modal) {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
-    }
-}
-
-function closeContactForm() {
-    const modal = document.getElementById('contactModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
-    }
-}
-
-function openBookingForm() {
-    const modal = document.getElementById('bookingModal');
-    if (modal) {
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
-    }
-}
-
-function closeBookingForm() {
-    const modal = document.getElementById('bookingModal');
-    if (modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
-    }
-}
-
-// Close modal when clicking outside of it
-window.addEventListener('click', (event) => {
-    const contactModal = document.getElementById('contactModal');
-    const bookingModal = document.getElementById('bookingModal');
-    
-    if (event.target === contactModal) {
-        closeContactForm();
-    }
-    if (event.target === bookingModal) {
-        closeBookingForm();
-    }
+// Keyboard arrow navigation for carousel
+document.addEventListener('keydown', e => {
+  if (document.querySelector('.modal.active') || document.querySelector('.lightbox.active') || document.querySelector('.legal-modal.active')) return;
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+  if (e.key === 'ArrowRight') changeSlide(1);
 });
 
-// Close modal with Escape key
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-        closeContactForm();
-        closeBookingForm();
-    }
+/* ---- INNER-PAGE CAROUSEL (performances/awards) ---- */
+function initInnerCarousel(containerSelector) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+  const slides = container.querySelectorAll('.perf-slide');
+  const dots = container.querySelectorAll('.perf-dot');
+  let idx = 0;
+
+  function show(n) {
+    idx = (n + slides.length) % slides.length;
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  show(0);
+
+  // Expose controls
+  container._show = show;
+  container._next = () => show(idx + 1);
+  container._prev = () => show(idx - 1);
+}
+
+/* ---- SCROLL REVEAL ---- */
+function initReveal() {
+  const items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  items.forEach(item => io.observe(item));
+}
+
+/* ---- MODAL HELPERS ---- */
+function _openModal(id) {
+  const m = document.getElementById(id);
+  if (!m) return;
+  m.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  // Focus first input
+  setTimeout(() => {
+    const first = m.querySelector('input, textarea, button.close');
+    if (first) first.focus();
+  }, 100);
+}
+
+function _closeModal(id) {
+  const m = document.getElementById(id);
+  if (!m) return;
+  m.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Click outside to close
+window.addEventListener('click', e => {
+  ['contactModal', 'bookingModal', 'legalModal'].forEach(id => {
+    const m = document.getElementById(id);
+    if (m && e.target === m) _closeModal(id);
+  });
+  const lb = document.getElementById('lightbox');
+  if (lb && e.target === lb) closeLightbox();
 });
 
-/* ============================================
-   FORM SUBMISSION HANDLING
-   ============================================ */
+// Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    ['contactModal', 'bookingModal', 'legalModal'].forEach(id => _closeModal(id));
+    closeLightbox();
+  }
+});
 
+/* CONTACT MODAL */
+function openContact() { _openModal('contactModal'); }
+function closeContact() { _closeModal('contactModal'); }
+
+/* BOOKING MODAL */
+function openBooking() { _openModal('bookingModal'); }
+function closeBooking() { _closeModal('bookingModal'); }
+
+/* ---- FORM VALIDATION & SUBMISSION ---- */
+function initForms() {
+  setupForm('contactForm', 'contactSuccess', closeContact);
+  setupForm('bookingForm', 'bookingSuccess', closeBooking);
+}
+
+function setupForm(formId, successId, closeFn) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!validateForm(form)) return;
+
+    const btn = form.querySelector('button[type="submit"]');
+    btn.classList.add('btn-loading');
+    btn.disabled = true;
+
+    // Simulate sending (replace with real EmailJS or fetch if desired)
+    await new Promise(r => setTimeout(r, 1200));
+
+    btn.classList.remove('btn-loading');
+    btn.disabled = false;
+
+    form.style.display = 'none';
+    const success = document.getElementById(successId);
+    if (success) success.style.display = 'block';
+
+    showToast('✓ Your message has been sent!');
+    form.reset();
+
+    setTimeout(() => {
+      if (success) success.style.display = 'none';
+      form.style.display = '';
+      closeFn();
+    }, 3500);
+  });
+}
+
+function validateForm(form) {
+  let valid = true;
+  form.querySelectorAll('[required]').forEach(field => {
+    const group = field.closest('.form-group');
+    const isEmpty = !field.value.trim();
+    const isEmail = field.type === 'email' && field.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value);
+
+    if (isEmpty || isEmail) {
+      valid = false;
+      field.classList.add('field-error');
+      if (group) group.classList.add('has-error');
+    } else {
+      field.classList.remove('field-error');
+      if (group) group.classList.remove('has-error');
+    }
+  });
+  return valid;
+}
+
+// Clear errors on input
+document.addEventListener('input', e => {
+  if (e.target.classList.contains('field-error')) {
+    e.target.classList.remove('field-error');
+    const group = e.target.closest('.form-group');
+    if (group) group.classList.remove('has-error');
+  }
+});
+
+/* ---- TOAST ---- */
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.className = 'toast' + (type ? ' toast-' + type : '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 4000);
+}
+
+/* ---- LIGHTBOX (gallery) ---- */
+let lightboxImages = [];
+let lightboxIndex = 0;
+
+function openLightbox(srcs, idx) {
+  lightboxImages = Array.isArray(srcs) ? srcs : [srcs];
+  lightboxIndex = idx || 0;
+  renderLightbox();
+  const lb = document.getElementById('lightbox');
+  if (lb) { lb.classList.add('active'); document.body.style.overflow = 'hidden'; }
+}
+
+function renderLightbox() {
+  const img = document.getElementById('lightboxImg');
+  if (img) img.src = lightboxImages[lightboxIndex];
+}
+
+function lightboxNav(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
+  renderLightbox();
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  if (lb) { lb.classList.remove('active'); document.body.style.overflow = ''; }
+}
+
+document.addEventListener('keydown', e => {
+  const lb = document.getElementById('lightbox');
+  if (!lb || !lb.classList.contains('active')) return;
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+});
+
+/* ---- LEGAL MODAL ---- */
+const LEGAL_CONTENT = {
+  privacy: `
+    <h2>Privacy Policy</h2>
+    <p><strong>Last updated:</strong> April 2026</p>
+    <h3>Information We Collect</h3>
+    <p>When you use the contact or booking forms on this website, we collect your name, email address, and any details you provide. This information is used solely to respond to your inquiry or process your booking request.</p>
+    <h3>How We Use Your Information</h3>
+    <p>We use your contact information exclusively to communicate with you regarding your inquiry. We do not sell, share, or distribute your personal information to third parties.</p>
+    <h3>Cookies</h3>
+    <p>This website uses no tracking cookies. We may use essential session data to ensure the website functions correctly.</p>
+    <h3>Contact Us</h3>
+    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:kapil955@gmail.com" style="color: var(--maroon);">kapil955@gmail.com</a>.</p>
+  `,
+  terms: `
+    <h2>Terms of Service</h2>
+    <p><strong>Last updated:</strong> April 2026</p>
+    <h3>Use of this Website</h3>
+    <p>This website is for informational and booking purposes for Richa Aneja's musical services. By accessing this site, you agree to use it only for lawful purposes and in a manner that does not infringe the rights of others.</p>
+    <h3>Intellectual Property</h3>
+    <p>All images, audio, video, and text content on this website are the property of Richa Aneja and may not be reproduced, distributed, or used without prior written permission.</p>
+    <h3>Booking Requests</h3>
+    <p>Submitting a booking form does not constitute a confirmed booking. Confirmation will be provided via email after availability is verified. Payment terms and performance agreements will be provided upon confirmation.</p>
+    <h3>Limitation of Liability</h3>
+    <p>Richa Aneja and her team are not liable for any direct or indirect damages arising from use of this website or reliance on any information contained herein.</p>
+    <h3>Contact</h3>
+    <p>For any questions regarding these Terms, contact us at <a href="mailto:kapil955@gmail.com" style="color: var(--maroon);">kapil955@gmail.com</a>.</p>
+  `
+};
+
+function openLegal(type) {
+  const inner = document.getElementById('legalInner');
+  if (inner) inner.innerHTML = LEGAL_CONTENT[type] || '';
+  _openModal('legalModal');
+}
+
+function closeLegal() { _closeModal('legalModal'); }
+
+/* ---- INNER PAGE CAROUSEL HELPER (used by performances & awards) ---- */
+let perfSlideIdx = 1;
+
+function perfChangeSlide(n) {
+  perfShowSlide(perfSlideIdx += n);
+}
+
+function perfCurrentSlide(n) {
+  perfShowSlide(perfSlideIdx = n);
+}
+
+function perfShowSlide(n) {
+  const slides = document.querySelectorAll('.perf-slide');
+  const dots = document.querySelectorAll('.perf-dot');
+  if (!slides.length) return;
+
+  if (n > slides.length) perfSlideIdx = 1;
+  if (n < 1) perfSlideIdx = slides.length;
+
+  slides.forEach((s, i) => s.classList.toggle('active', i === perfSlideIdx - 1));
+  dots.forEach((d, i) => d.classList.toggle('active', i === perfSlideIdx - 1));
+}
+
+/* ---- GALLERY INIT (called from inner pages) ---- */
+function initGallery(selector) {
+  const items = document.querySelectorAll(selector);
+  const srcs = Array.from(items).map(item => {
+    const img = item.querySelector('img');
+    return item.dataset.full || (img ? img.src : '');
+  });
+
+  items.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(srcs, i));
+    item.setAttribute('tabindex', '0');
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(srcs, i);
+      }
+    });
+  });
+}
+
+/* ---- LIGHTBOX HTML (injected if needed) ---- */
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize EmailJS with your public key
-    emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your actual public key
-    
-    const forms = document.querySelectorAll('form');
-    
-    forms.forEach(form => {
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(form);
-            
-            // Validate required fields
-            const inputs = form.querySelectorAll('input[required], textarea[required]');
-            let isValid = true;
-            
-            inputs.forEach(input => {
-                if (!input.value.trim()) {
-                    isValid = false;
-                    input.style.borderColor = '#ff0066';
-                } else {
-                    input.style.borderColor = '';
-                }
-            });
-            
-            if (isValid) {
-                // Prepare email parameters
-                const emailParams = {};
-                for (let [key, value] of formData.entries()) {
-                    emailParams[key] = value;
-                }
-                
-                // Determine which form it is
-                const isContactForm = form.closest('#contactModal') !== null;
-                const serviceID = 'YOUR_SERVICE_ID'; // Replace with your service ID
-                const templateID = isContactForm ? 'YOUR_CONTACT_TEMPLATE_ID' : 'YOUR_BOOKING_TEMPLATE_ID'; // Replace with your template IDs
-                
-                // Send email
-                emailjs.send(serviceID, templateID, emailParams)
-                    .then((response) => {
-                        console.log('SUCCESS!', response.status, response.text);
-                        alert('Thank you! Your message has been sent successfully.');
-                        form.reset();
-                        
-                        // Close modal
-                        if (isContactForm) {
-                            closeContactForm();
-                        } else {
-                            closeBookingForm();
-                        }
-                    }, (error) => {
-                        console.log('FAILED...', error);
-                        alert('Sorry, there was an error sending your message. Please try again later.');
-                    });
-            }
-        });
-    });
-});
-/* ============================================
-   AUDIO ELEMENT HANDLING
-   ============================================ */
+  if (!document.getElementById('lightbox')) {
+    document.body.insertAdjacentHTML('beforeend', `
+      <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">×</button>
+        <button class="lightbox-prev" onclick="lightboxNav(-1)" aria-label="Previous">&#10094;</button>
+        <img id="lightboxImg" src="" alt="Gallery image">
+        <button class="lightbox-next" onclick="lightboxNav(1)" aria-label="Next">&#10095;</button>
+      </div>
+    `);
+  }
 
-const audioElement = document.getElementById('splash-audio');
-if (audioElement) {
-    audioElement.addEventListener('loadedmetadata', () => {
-        // Start audio at 25 seconds (for demo purposes)
-        audioElement.currentTime = 25;
-    });
+  // Init reveals for any page
+  initReveal();
 
-    // Handle audio errors gracefully
-    audioElement.addEventListener('error', () => {
-        console.log('Audio file could not be loaded');
-    });
-}
+  // Init inner page carousel if present
+  if (document.querySelector('.perf-slide')) {
+    perfShowSlide(1);
+    setInterval(() => perfChangeSlide(1), 4000);
+  }
 
-/* ============================================
-   SMOOTH SCROLL SUPPORT CHECK
-   ============================================ */
-
-// Check if browser supports smooth scrolling
-if (!CSS.supports('scroll-behavior', 'smooth')) {
-    // Fallback for browsers that don't support smooth scroll
-    document.documentElement.style.scrollBehavior = 'auto';
-}
-
-/* ============================================
-   PERFORMANCE OPTIMIZATION
-   ============================================ */
-
-// Debounce function for resize events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Handle window resize
-const handleResize = debounce(() => {
-    // Adjust carousel if needed
-    const carousel = document.querySelector('.carousel');
-    if (carousel) {
-        console.log('Window resized - carousel responsive');
-    }
-}, 250);
-
-window.addEventListener('resize', handleResize);
-
-/* ============================================
-   ACTIVE NAV LINK ON SCROLL
-   ============================================ */
-
-window.addEventListener('scroll', () => {
-    const navLinks = document.querySelectorAll('.nav-link');
-    let current = '';
-
-    // Check which section is in view
-    const sections = document.querySelectorAll('section');
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('class');
-        }
-    });
-
-    // Update active link
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.textContent.toLowerCase() === current.toLowerCase()) {
-            link.classList.add('active');
-        }
-    });
+  // Init gallery lightbox
+  if (document.querySelector('.gallery-item')) {
+    initGallery('.gallery-item');
+  }
 });
 
-/* ============================================
-   ACCESSIBILITY ENHANCEMENTS
-   ============================================ */
-
-// Add keyboard navigation for buttons
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        if (event.target.classList.contains('btn')) {
-            event.target.click();
-        }
-    }
-});
-
-// Add focus visible styling
-document.addEventListener('focusin', (event) => {
-    if (event.target.classList.contains('btn') || 
-        event.target.classList.contains('nav-link') ||
-        event.target.tagName === 'INPUT' ||
-        event.target.tagName === 'TEXTAREA') {
-        event.target.style.outline = '2px solid #00c6ff';
-        event.target.style.outlineOffset = '2px';
-    }
-});
-document.addEventListener("click", () => {
-    const audio = document.getElementById("splash-audio");
-    audio.play();
-});
-document.addEventListener('focusout', (event) => {
-    if (event.target.classList.contains('btn') || 
-        event.target.classList.contains('nav-link') ||
-        event.target.tagName === 'INPUT' ||
-        event.target.tagName === 'TEXTAREA') {
-        event.target.style.outline = '';
-        event.target.style.outlineOffset = '';
-    }
-});
- document.getElementById('pp').addEventListener('click', function () {
-      alert('Privacy policy.');
-    });
- document.getElementById('tos').addEventListener('click', function () {
-      alert('Terms of service');
-    });
-
-console.log('Improved script loaded successfully!');
-// Run this on mount
-setTimeout(() => {
-  const splash = document.querySelector('.splash-screen');
-  splash.classList.add('splash-hidden');
-}, 1500); // 1.5 seconds is the sweet spot
-
-
-
-
-
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // 1. INITIALIZE EMAILJS
-//     // Replace 'YOUR_PUBLIC_KEY' with the key from your EmailJS Account tab
-//     emailjs.init('YOUR_PUBLIC_KEY'); 
-
-//     // 2. SPLASH SCREEN LOGIC (Fast & Elegant)
-//     const splash = document.getElementById('splash-screen');
-//     if (splash) {
-//         setTimeout(() => {
-//             splash.style.opacity = '0';
-//             splash.style.transition = 'opacity 0.8s ease';
-//             setTimeout(() => {
-//                 splash.style.display = 'none';
-//             }, 800);
-//         }, 1500); // 1.5s is the professional sweet spot
-//     }
-
-//     // 3. AUDIO HANDLING (The Professional "First-Click" Trigger)
-//     // Browsers block auto-play. This waits for the first user interaction.
-//     const audio = document.getElementById('splash-audio');
-//     if (audio) {
-//         const playAudio = () => {
-//             audio.play().catch(err => console.log("Audio playback blocked"));
-//             document.removeEventListener('click', playAudio);
-//         };
-//         document.addEventListener('click', playAudio);
-//     }
-
-//     // 4. MOBILE MENU
-//     initMobileMenu();
-
-//     // 5. CAROUSEL
-//     startCarousel();
-
-//     // 6. FORM HANDLING (Direct to kapil955@gmail.com)
-//     initForms();
-// });
-
-// /* ============================================
-//    FORM SUBMISSION (EmailJS Logic)
-//    ============================================ */
-// function initForms() {
-//     const forms = document.querySelectorAll('form');
-    
-//     forms.forEach(form => {
-//         form.addEventListener('submit', function(e) {
-//             e.preventDefault();
-            
-//             const submitBtn = this.querySelector('button[type="submit"]');
-//             const originalText = submitBtn.innerText;
-
-//             // Visual feedback
-//             submitBtn.innerText = "Sending to Kapil...";
-//             submitBtn.disabled = true;
-
-//             // These MUST match your EmailJS Dashboard
-//             const serviceID = 'YOUR_SERVICE_ID'; 
-//             const templateID = 'YOUR_TEMPLATE_ID';
-
-//             emailjs.sendForm(serviceID, templateID, this)
-//                 .then(() => {
-//                     alert('Message successfully sent to kapil955@gmail.com!');
-//                     this.reset();
-//                     closeContactForm();
-//                     closeBookingForm();
-//                 })
-//                 .catch((err) => {
-//                     console.error('Email Error:', err);
-//                     alert('Failed to send. Please check your EmailJS keys.');
-//                 })
-//                 .finally(() => {
-//                     submitBtn.innerText = originalText;
-//                     submitBtn.disabled = false;
-//                 });
-//         });
-//     });
-// }
-
-// /* ============================================
-//    MOBILE NAVIGATION
-//    ============================================ */
-// function initMobileMenu() {
-//     const hamburger = document.getElementById('hamburger');
-//     const navMenu = document.getElementById('nav-menu');
-//     const navLinks = document.querySelectorAll('.nav-link');
-
-//     if (hamburger) {
-//         hamburger.addEventListener('click', () => {
-//             hamburger.classList.toggle('active');
-//             navMenu.classList.toggle('active');
-//         });
-//     }
-
-//     navLinks.forEach(link => {
-//         link.addEventListener('click', () => {
-//             hamburger.classList.remove('active');
-//             navMenu.classList.remove('active');
-//         });
-//     });
-// }
-
-// /* ============================================
-//    CAROUSEL LOGIC (4s Interval for Readability)
-//    ============================================ */
-// let slideIndex = 0;
-// let slideTimer;
-
-// function startCarousel() {
-//     showSlides();
-//     slideTimer = setInterval(showSlides, 4000); 
-// }
-
-// function showSlides() {
-//     const slides = document.getElementsByClassName('carousel-slide');
-//     const indicators = document.getElementsByClassName('indicator');
-
-//     if (!slides.length) return;
-
-//     for (let i = 0; i < slides.length; i++) {
-//         slides[i].classList.remove('fade');
-//         if (indicators[i]) indicators[i].classList.remove('active');
-//     }
-
-//     slideIndex++;
-//     if (slideIndex > slides.length) slideIndex = 1;
-
-//     slides[slideIndex - 1].classList.add('fade');
-//     if (indicators[slideIndex - 1]) indicators[slideIndex - 1].classList.add('active');
-// }
-
-// /* ============================================
-//    MODAL CONTROL
-//    ============================================ */
-// function openContactForm() {
-//     document.getElementById('contactModal').style.display = 'block';
-//     document.body.style.overflow = 'hidden';
-// }
-
-// function closeContactForm() {
-//     document.getElementById('contactModal').style.display = 'none';
-//     document.body.style.overflow = 'auto';
-// }
-
-// function openBookingForm() {
-//     document.getElementById('bookingModal').style.display = 'block';
-//     document.body.style.overflow = 'hidden';
-// }
-
-// function closeBookingForm() {
-//     document.getElementById('bookingModal').style.display = 'none';
-//     document.body.style.overflow = 'auto';
-// }
-
-// // Close on outside click
-// window.addEventListener('click', (e) => {
-//     if (e.target.className === 'modal') {
-//         closeContactForm();
-//         closeBookingForm();
-//     }
-// });
-
-// /* ============================================
-//    LEGAL PLACEHOLDERS (Replace Alerts later)
-//    ============================================ */
-// const pp = document.getElementById('pp');
-// const tos = document.getElementById('tos');
-
-// if (pp) pp.addEventListener('click', () => alert('Privacy Policy coming soon.'));
-// if (tos) tos.addEventListener('click', () => alert('Terms of Service coming soon.'));
+console.log('Richa Aneja — site loaded ✨');

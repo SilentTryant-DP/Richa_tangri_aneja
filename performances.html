@@ -1,926 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore Richa Aneja's memorable performances - from Indian Idol Season 3 to theatrical productions and live concerts.">
-    <meta name="keywords" content="Richa Aneja performances, Indian Idol, concerts, live shows, classical music">
-    <meta property="og:title" content="Performances - Richa Aneja">
-    <meta property="og:description" content="A journey through Richa Aneja's most memorable performances and stage moments.">
-    
-    <title>Performances - Richa Aneja</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Page-specific styles for Performances */
-        
-        .page-header {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            color: white;
-            padding: 80px var(--spacing-unit);
-            text-align: center;
-        }
-
-        .page-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .page-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* Carousel Section */
-        .carousel-section {
-            padding: 60px var(--spacing-unit);
-            background-color: #f8f9fa;
-        }
-
-        .carousel-container {
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .carousel-slide {
-            display: none;
-            width: 100%;
-            position: relative;
-        }
-
-        .carousel-slide.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Carousel Navigation */
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .carousel-btn {
-            pointer-events: all;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .carousel-btn:hover {
-            background: rgba(0, 0, 0, 0.8);
-            transform: scale(1.1);
-        }
-
-        /* Carousel Indicators */
-        .carousel-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 0 10px;
-            z-index: 10;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            padding: 0;
-        }
-
-        .carousel-dot.active {
-            background: white;
-            width: 30px;
-            border-radius: 6px;
-        }
-
-        /* Performance Sections */
-        .performance-section {
-            padding: 60px var(--spacing-unit);
-            background-color: white;
-        }
-
-        .performance-section:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        .performance-section h2 {
-            font-size: 2rem;
-            color: #0072ff;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .performance-content {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #333;
-            max-width: 900px;
-        }
-
-        .performance-content p {
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            padding: 60px var(--spacing-unit);
-            background-color: #f8f9fa;
-        }
-
-        .gallery-section h2 {
-            font-size: 2rem;
-            color: #0072ff;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            aspect-ratio: 3 / 4;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 114, 255, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            color: white;
-            font-size: 14px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        /* Modal for Full-Screen Gallery */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content-gallery {
-            position: relative;
-            margin: 0 auto;
-            padding: 20px;
-            width: 90%;
-            max-width: 900px;
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: #00c6ff;
-        }
-
-        /* Highlights Section */
-        .highlights-section {
-            padding: 60px var(--spacing-unit);
-            background: linear-gradient(135deg, rgba(0, 198, 255, 0.1), rgba(0, 114, 255, 0.1));
-        }
-
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .highlight-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            border-left: 4px solid #00c6ff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .highlight-card h3 {
-            color: #0072ff;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .highlight-card p {
-            color: #666;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 60px var(--spacing-unit);
-            text-align: center;
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            color: white;
-        }
-
-        .cta h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .cta p {
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .cta .btn {
-            padding: 12px 40px;
-            font-size: 1rem;
-            border: 2px solid white;
-            background: transparent;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .cta .btn:hover {
-            background: white;
-            color: #0072ff;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .performance-content {
-                font-size: 1rem;
-            }
-
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .page-header {
-                padding: 40px var(--spacing-unit);
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .performance-section h2 {
-                font-size: 1.5rem;
-            }
-
-            .performance-content {
-                font-size: 0.95rem;
-                text-align: left;
-            }
-
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 15px;
-            }
-
-            .gallery-item {
-                aspect-ratio: 1 / 1;
-            }
-
-            .carousel-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
-                padding: 0;
-            }
-
-            .modal-content-gallery {
-                height: 70vh;
-                padding: 10px;
-            }
-
-            .modal-close {
-                top: 10px;
-                right: 20px;
-                font-size: 30px;
-            }
-
-            .highlights-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .cta-buttons {
-                gap: 15px;
-            }
-
-            .cta .btn {
-                padding: 10px 30px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .page-header {
-                padding: 30px var(--spacing-unit);
-            }
-
-            .page-header h1 {
-                font-size: 1.5rem;
-            }
-
-            .page-header p {
-                font-size: 1rem;
-            }
-
-            .carousel-section {
-                padding: 30px var(--spacing-unit);
-            }
-
-            .carousel-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 16px;
-            }
-
-            .carousel-indicators {
-                bottom: 10px;
-                gap: 6px;
-            }
-
-            .carousel-dot {
-                width: 8px;
-                height: 8px;
-            }
-
-            .carousel-dot.active {
-                width: 20px;
-            }
-
-            .performance-section {
-                padding: 30px var(--spacing-unit);
-            }
-
-            .performance-section h2 {
-                font-size: 1.2rem;
-                gap: 10px;
-            }
-
-            .performance-content {
-                font-size: 0.9rem;
-            }
-
-            .gallery-container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .gallery-item {
-                aspect-ratio: 1 / 1;
-            }
-
-            .cta h2 {
-                font-size: 1.3rem;
-            }
-
-            .cta p {
-                font-size: 0.9rem;
-            }
-
-            .highlight-card {
-                padding: 20px;
-            }
-
-            .highlight-card h3 {
-                font-size: 1.1rem;
-            }
-
-            .highlight-card p {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Richa Aneja's memorable performances - from Indian Idol Season 3 to theatrical productions and live concerts.">
+  <title>Performances — Richa Aneja</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Skip Navigation Link -->
-    <a href="#main-content" class="skip-nav">Skip to main content</a>
 
-    <!-- Navigation Header -->
-    <header class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <img src="main.jpeg" alt="Richa Aneja Logo" class="logo-img">
-                <span class="logo-text">Richa Aneja</span>
-            </div>
-            
-            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+<a href="#main-content" class="skip-nav">Skip to main content</a>
 
-            <nav class="nav-menu" id="nav-menu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="earlylife.html" class="nav-link">Early Life</a>
-                <a href="performances.html" class="nav-link active">Performances</a>
-                <a href="awards.html" class="nav-link">Awards</a>
-                <a href="index.html#contact" class="nav-link cta-link">Contact</a>
-            </nav>
+<header class="navbar" id="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <img src="main.jpeg" alt="Richa Aneja" class="logo-img">
+      <span class="logo-text">Richa Aneja</span>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
+    </button>
+    <nav class="nav-menu" id="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="earlylife.html" class="nav-link">Early Life</a>
+      <a href="performances.html" class="nav-link active">Performances</a>
+      <a href="awards.html" class="nav-link">Awards</a>
+      <a href="index.html#contact" class="nav-link cta-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">On Stage</span>
+      <h1>Performances</h1>
+      <p>A Journey Through Music and Expression</p>
+    </div>
+  </section>
+
+  <!-- FEATURED CAROUSEL -->
+  <section class="carousel-section">
+    <div class="container">
+      <span class="section-label">Highlights</span>
+      <h2 class="section-title">Featured <em>Moments</em></h2>
+      <div class="divider"></div>
+      <div class="perf-carousel" style="position:relative;">
+        <div class="perf-slide active"><img src="images/IMG-20250806-WA0003.jpg" alt="Performance 1"></div>
+        <div class="perf-slide"><img src="images/IMG-20250806-WA0004.jpg" alt="Performance 2"></div>
+        <div class="perf-slide"><img src="images/IMG-20250806-WA0005.jpg" alt="Performance 3"></div>
+        <div class="perf-slide"><img src="images/IMG-20250806-WA0006.jpg" alt="Performance 4"></div>
+        <div class="perf-slide"><img src="images/IMG-20250806-WA0007.jpg" alt="Performance 5"></div>
+        <div class="perf-slide"><img src="images/IMG-20250806-WA0008.jpg" alt="Performance 6"></div>
+        <div class="perf-nav">
+          <button class="perf-btn" onclick="perfChangeSlide(-1)" aria-label="Previous">&#10094;</button>
+          <button class="perf-btn" onclick="perfChangeSlide(1)" aria-label="Next">&#10095;</button>
         </div>
-    </header>
+      </div>
+      <div class="perf-dots">
+        <button class="perf-dot active" onclick="perfCurrentSlide(1)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(2)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(3)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(4)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(5)"></button>
+        <button class="perf-dot" onclick="perfCurrentSlide(6)"></button>
+      </div>
+    </div>
+  </section>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Page Header -->
-        <section class="page-header">
-            <div class="container">
-                <h1>🎤 Richa</h1>
-                <p>A Voice That Moves Hearts</p>
-            </div>
-        </section>
-
-        <!-- Carousel Section -->
-        <section class="carousel-section">
-            <div class="container">
-                <div class="carousel-container">
-                    <!-- Slides -->
-                    <div class="carousel-slide active">
-                        <img src="images/IMG-20250806-WA0006.jpg" alt="Richa Aneja performance 1">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0008.jpg" alt="Richa Aneja performance 2">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0012.jpg" alt="Richa Aneja performance 3">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0016.jpg" alt="Richa Aneja performance 4">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0022.jpg" alt="Richa Aneja performance 5">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0025.jpg" alt="Richa Aneja performance 6">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0026.jpg" alt="Richa Aneja performance 7">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0027.jpg" alt="Richa Aneja performance 8">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0028.jpg" alt="Richa Aneja performance 9">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0029.jpg" alt="Richa Aneja performance 10">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0031.jpg" alt="Richa Aneja performance 11">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0032.jpg" alt="Richa Aneja performance 12">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0035.jpg" alt="Richa Aneja performance 13">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0036.jpg" alt="Richa Aneja performance 14">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0039.jpg" alt="Richa Aneja performance 15">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0040.jpg" alt="Richa Aneja performance 16">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0043.jpg" alt="Richa Aneja performance 17">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="images/IMG-20250806-WA0046.jpg" alt="Richa Aneja performance 18">
-                    </div>
-
-                    <!-- Navigation -->
-                    <div class="carousel-nav">
-                        <button class="carousel-btn" aria-label="Previous slide" onclick="changeSlide(-1)">❮</button>
-                        <button class="carousel-btn" aria-label="Next slide" onclick="changeSlide(1)">❯</button>
-                    </div>
-
-                    <!-- Indicators -->
-                    <div class="carousel-indicators">
-                        <button class="carousel-dot active" onclick="currentSlide(1)" aria-label="Go to slide 1"></button>
-                        <button class="carousel-dot" onclick="currentSlide(2)" aria-label="Go to slide 2"></button>
-                        <button class="carousel-dot" onclick="currentSlide(3)" aria-label="Go to slide 3"></button>
-                        <button class="carousel-dot" onclick="currentSlide(4)" aria-label="Go to slide 4"></button>
-                        <button class="carousel-dot" onclick="currentSlide(5)" aria-label="Go to slide 5"></button>
-                        <button class="carousel-dot" onclick="currentSlide(6)" aria-label="Go to slide 6"></button>
-                        <button class="carousel-dot" onclick="currentSlide(7)" aria-label="Go to slide 7"></button>
-                        <button class="carousel-dot" onclick="currentSlide(8)" aria-label="Go to slide 8"></button>
-                        <button class="carousel-dot" onclick="currentSlide(9)" aria-label="Go to slide 9"></button>
-                        <button class="carousel-dot" onclick="currentSlide(10)" aria-label="Go to slide 10"></button>
-                        <button class="carousel-dot" onclick="currentSlide(11)" aria-label="Go to slide 11"></button>
-                        <button class="carousel-dot" onclick="currentSlide(12)" aria-label="Go to slide 12"></button>
-                        <button class="carousel-dot" onclick="currentSlide(13)" aria-label="Go to slide 13"></button>
-                        <button class="carousel-dot" onclick="currentSlide(14)" aria-label="Go to slide 14"></button>
-                        <button class="carousel-dot" onclick="currentSlide(15)" aria-label="Go to slide 15"></button>
-                        <button class="carousel-dot" onclick="currentSlide(16)" aria-label="Go to slide 16"></button>
-                        <button class="carousel-dot" onclick="currentSlide(17)" aria-label="Go to slide 17"></button>
-                        <button class="carousel-dot" onclick="currentSlide(18)" aria-label="Go to slide 18"></button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Performance Highlights -->
-        <section class="performance-section">
-            <div class="container">
-                <h2>🎵 A Stage Illuminated by Soul</h2>
-              <div class="performance-content"> <iframe width="560" height="315" src="https://www.youtube.com/embed/5Qf5Ss2mnoM?si=LTPUI0rZVCdvesFI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><p>Every time Richa Aneja steps onto a stage, she brings with her not just a voice, but a story—a tapestry of emotion, tradition, and sheer artistry. From her earliest performances at school events and youth festivals to commanding attention on national platforms like Indian Idol, Richa has always sung with a rare sincerity that touches hearts.</p><p>Her live concerts, whether in intimate auditoriums or grand cultural festivals, are marked by a magnetic presence and a voice that flows effortlessly across genres—be it classical ragas, devotional bhajans, or contemporary Punjabi melodies. Audiences have witnessed her perform ttext to text ans iframe tag to rightracks like <em>Nitt Khair Manga</em> with such depth that even silence feels like applause.</p></div> 
-            </div>
-        </section>
-
-        <!-- Performance Highlights Cards -->
-        <section class="highlights-section">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 50px; color: #0072ff;">Performance Highlights</h2>
-                <div class="highlights-grid">
-                    <div class="highlight-card">
-                        <h3>🎬 Indian Idol Season 3</h3>
-                        <p>Top 10 finalist on India's biggest singing platform, captivating millions with soulful renditions and earning national recognition at just 16 years old.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h3>🎭 Theatre Productions</h3>
-                        <p>Featured in productions like <strong>Kudesan</strong>, <strong>Rihayee</strong>, <strong>Jasma Odhan</strong>, and <strong>Arzoo</strong>, blending music with storytelling in immersive experiences.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h3>🎶 Harivallabh Sangeet Sammelan</h3>
-                        <p>Triumph in prestigious semi-classical competitions, showcasing technical brilliance and emotional depth in classical music performances.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h3>📀 Film & Album Features</h3>
-                        <p>Lent her voice to Punjabi songs in albums and film soundtracks, reaching audiences across multiple platforms and genres.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h3>🏆 Festival Triumphs</h3>
-                        <p>Top honors and standing ovations at youth festivals, inter-zonal university competitions, and major cultural showcases nationwide.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <h3>🌐 Virtual & Online</h3>
-                        <p>During the pandemic, adapted gracefully with online concerts and virtual performances, proving that artistry knows no bounds.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Theatre & Beyond -->
-        <section class="performance-section">
-            <div class="container">
-                <h2>🎭 Theatre & Beyond</h2>
-                <div class="performance-content">
-                    <p>Her performances in theatre productions such as <strong>Kudesan</strong> and <strong>Rihayee</strong> reveal her ability to blend music with narrative, creating immersive experiences that linger long after the curtain falls. These productions showcase not just her vocal prowess, but her versatility as a performer capable of navigating complex emotional landscapes.</p>
-                    
-                    <p>From devotional bhajans that stir the soul to Bollywood classics that resonate with contemporary audiences, Richa's repertoire is as diverse as it is impressive. Each genre she touches—whether classical, semi-classical, folk, or contemporary—is enriched by her distinctive interpretation and technical mastery.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pandemic & Resilience -->
-        <section class="performance-section" style="background-color: #f8f9fa;">
-            <div class="container">
-                <h2>💪 Adapting Through Challenges</h2>
-                <div class="performance-content">
-                    <p>Even during the pandemic, when stages fell silent across the nation, Richa's voice found new platforms—through online concerts, virtual teaching, and soulful recordings that kept the spirit of music alive. Her ability to adapt without losing the essence of her artistry demonstrates a deep commitment to her craft.</p>
-                    
-                    <p>During this period, she also pursued her Ph.D. and continued to teach music online, proving that for Richa, music isn't just a profession—it's a calling. And every time she sings, whether on a grand stage or through a digital screen, the moment becomes a sanctuary, and the audience, a witness to something timeless.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section class="gallery-section">
-            <div class="container">
-                <h2>📸 Performance Gallery</h2>
-                <div class="gallery-container">
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0006.jpg')">
-                        <img src="images/IMG-20250806-WA0006.jpg" alt="Performance gallery 1">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0008.jpg')">
-                        <img src="images/IMG-20250806-WA0008.jpg" alt="Performance gallery 2">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0012.jpg')">
-                        <img src="images/IMG-20250806-WA0012.jpg" alt="Performance gallery 3">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0015.jpg')">
-                        <img src="images/IMG-20250806-WA0015.jpg" alt="Performance gallery 4">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0016.jpg')">
-                        <img src="images/IMG-20250806-WA0016.jpg" alt="Performance gallery 5">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0022.jpg')">
-                        <img src="images/IMG-20250806-WA0022.jpg" alt="Performance gallery 6">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0025.jpg')">
-                        <img src="images/IMG-20250806-WA0025.jpg" alt="Performance gallery 7">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0026.jpg')">
-                        <img src="images/IMG-20250806-WA0026.jpg" alt="Performance gallery 8">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0027.jpg')">
-                        <img src="images/IMG-20250806-WA0027.jpg" alt="Performance gallery 9">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0028.jpg')">
-                        <img src="images/IMG-20250806-WA0028.jpg" alt="Performance gallery 10">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0029.jpg')">
-                        <img src="images/IMG-20250806-WA0029.jpg" alt="Performance gallery 11">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0031.jpg')">
-                        <img src="images/IMG-20250806-WA0031.jpg" alt="Performance gallery 12">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0032.jpg')">
-                        <img src="images/IMG-20250806-WA0032.jpg" alt="Performance gallery 13">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0035.jpg')">
-                        <img src="images/IMG-20250806-WA0035.jpg" alt="Performance gallery 14">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0036.jpg')">
-                        <img src="images/IMG-20250806-WA0036.jpg" alt="Performance gallery 15">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0039.jpg')">
-                        <img src="images/IMG-20250806-WA0039.jpg" alt="Performance gallery 16">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0040.jpg')">
-                        <img src="images/IMG-20250806-WA0040.jpg" alt="Performance gallery 17">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0043.jpg')">
-                        <img src="images/IMG-20250806-WA0043.jpg" alt="Performance gallery 18">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                    <div class="gallery-item" onclick="openModal('images/IMG-20250806-WA0046.jpg')">
-                        <img src="images/IMG-20250806-WA0046.jpg" alt="Performance gallery 19">
-                        <div class="gallery-overlay">Click to view</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Modal for Gallery -->
-        <div id="galleryModal" class="modal">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div class="modal-content-gallery">
-                <img id="modalImage" class="modal-image" src="" alt="Full screen gallery image">
-            </div>
+  <!-- PERFORMANCE HIGHLIGHTS -->
+  <section class="about" style="background: var(--ivory-dark);">
+    <div class="container">
+      <span class="section-label">Stage Career</span>
+      <h2 class="section-title">Performance <em>Highlights</em></h2>
+      <div class="divider"></div>
+      <div class="highlights">
+        <div class="highlight-card reveal">
+          <div class="highlight-icon">🌟</div>
+          <h3>Indian Idol Season 3</h3>
+          <p>Reached the Top 10 finals on India's most prestigious singing competition, captivating a national audience with her soulful classical-meets-contemporary style</p>
         </div>
-
-        <!-- CTA Section -->
-        <section class="cta">
-            <div class="container">
-                <h2>Experience Richa's Magic</h2>
-                <p>Ready to book Richa for your event or learn more about her performances?</p>
-                <div class="cta-buttons">
-                    <a href="index.html#booking" class="btn">Book a Performance</a>
-                    <a href="index.html#contact" class="btn">Get In Touch</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>About Richa Aneja</h4>
-                    <p>Award-winning vocalist, Indian Idol Top 10 finalist, and music educator dedicated to preserving and promoting Indian classical music.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="earlylife.html">Early Life</a></li>
-                        <li><a href="performances.html">Performances</a></li>
-                        <li><a href="awards.html">Awards</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Follow</h4>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
-                        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
-                        <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <p>Email <a href="mailto:kapil955@gmail.com">us to connect</a></p>
-                    <p>Phone: <a href="tel:+918847217406">+91 88472 17406</a></p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Richa Aneja. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-            </div>
+        <div class="highlight-card reveal reveal-delay-1">
+          <div class="highlight-icon">🎼</div>
+          <h3>Classical Recitals</h3>
+          <p>Performed at prestigious classical music sabhas and sammelans across Punjab, Haryana, and Delhi, showcasing her mastery of the Gwalior Gharana tradition</p>
         </div>
-    </footer>
+        <div class="highlight-card reveal reveal-delay-2">
+          <div class="highlight-icon">🕉️</div>
+          <h3>Devotional Concerts</h3>
+          <p>Rendered bhajans and devotional music at temples and cultural events, earning the Inter-University award in both Ghazal and Bhajan Gayaki categories</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script src="script.js"></script>
-    <script>
-        let currentSlideIndex = 1;
+  <!-- GALLERY -->
+  <section class="gallery-section">
+    <div class="container">
+      <span class="section-label">Gallery</span>
+      <h2 class="section-title">Performance <em>Gallery</em></h2>
+      <div class="divider"></div>
+      <div class="gallery-grid">
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0006.jpg"><img src="images/IMG-20250806-WA0006.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0008.jpg"><img src="images/IMG-20250806-WA0008.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0012.jpg"><img src="images/IMG-20250806-WA0012.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0015.jpg"><img src="images/IMG-20250806-WA0015.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0016.jpg"><img src="images/IMG-20250806-WA0016.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0022.jpg"><img src="images/IMG-20250806-WA0022.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0025.jpg"><img src="images/IMG-20250806-WA0025.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0026.jpg"><img src="images/IMG-20250806-WA0026.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0027.jpg"><img src="images/IMG-20250806-WA0027.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0028.jpg"><img src="images/IMG-20250806-WA0028.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0029.jpg"><img src="images/IMG-20250806-WA0029.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0031.jpg"><img src="images/IMG-20250806-WA0031.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0032.jpg"><img src="images/IMG-20250806-WA0032.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0035.jpg"><img src="images/IMG-20250806-WA0035.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0036.jpg"><img src="images/IMG-20250806-WA0036.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0039.jpg"><img src="images/IMG-20250806-WA0039.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0040.jpg"><img src="images/IMG-20250806-WA0040.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0043.jpg"><img src="images/IMG-20250806-WA0043.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+        <div class="gallery-item" data-full="images/IMG-20250806-WA0046.jpg"><img src="images/IMG-20250806-WA0046.jpg" alt="Performance"><div class="gallery-overlay"><span>View</span></div></div>
+      </div>
+    </div>
+  </section>
 
-        function changeSlide(n) {
-            showSlide(currentSlideIndex += n);
-        }
+  <section class="cta">
+    <div class="container" style="position:relative;z-index:1;text-align:center;">
+      <span class="section-label">Book Richa</span>
+      <h2 class="section-title" style="color:var(--ivory);">Experience <em style="color:var(--gold-light);">Her Magic</em></h2>
+      <p style="color:rgba(253,248,240,0.65);margin-bottom:40px;">Book Richa for your event or get in touch to learn more</p>
+      <div class="cta-buttons">
+        <button class="btn btn-primary" onclick="openBooking()">🎤 Book a Performance</button>
+        <button class="btn btn-secondary" onclick="openContact()">✉ Get In Touch</button>
+      </div>
+    </div>
+  </section>
 
-        function currentSlide(n) {
-            showSlide(currentSlideIndex = n);
-        }
+</main>
 
-        function showSlide(n) {
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.carousel-dot');
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Richa Aneja</h4>
+        <p>Award-winning vocalist, Indian Idol Top 10 finalist, and music educator dedicated to preserving and promoting Indian classical music.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="earlylife.html">Early Life</a></li>
+          <li><a href="performances.html">Performances</a></li>
+          <li><a href="awards.html">Awards</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow</h4>
+        <div class="social-links">
+          <a href="https://www.instagram.com/richa_aneja/" target="_blank" rel="noopener">📸 Instagram</a>
+          <a href="https://www.youtube.com/@richaanejaindianidolfame1950" target="_blank" rel="noopener">▶ YouTube</a>
+          <a href="https://www.linkedin.com/in/richa-aneja-indianidolfame-88490136a" target="_blank" rel="noopener">💼 LinkedIn</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <p><a href="mailto:kapil955@gmail.com">kapil955@gmail.com</a></p>
+        <p><a href="tel:+918847217406">+91 88472 17406</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Richa Aneja. All rights reserved.</p>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <button class="footer-legal-btn" onclick="openLegal('privacy')">Privacy Policy</button>
+        <span style="color:rgba(253,248,240,0.2);">|</span>
+        <button class="footer-legal-btn" onclick="openLegal('terms')">Terms of Service</button>
+      </div>
+    </div>
+  </div>
+</footer>
 
-            if (n > slides.length) {
-                currentSlideIndex = 1;
-            }
-            if (n < 1) {
-                currentSlideIndex = slides.length;
-            }
+<!-- CONTACT MODAL -->
+<div id="contactModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close" onclick="closeContact()" aria-label="Close">×</button>
+    <h2>Get In Touch</h2>
+    <span class="modal-subtitle">We'd love to hear from you</span>
+    <div id="contactSuccess" class="form-success">
+      <div class="success-icon">✉️</div>
+      <h3>Message Sent!</h3>
+      <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+    </div>
+    <form id="contactForm" novalidate>
+      <div class="form-group" id="fg-name"><label for="c-name">Your Name</label><input type="text" id="c-name" name="name" placeholder="Your name" required><span class="error-msg">Please enter your name</span></div>
+      <div class="form-group" id="fg-email"><label for="c-email">Email</label><input type="email" id="c-email" name="email" placeholder="your@email.com" required><span class="error-msg">Please enter a valid email</span></div>
+      <div class="form-group" id="fg-message"><label for="c-message">Message</label><textarea id="c-message" name="message" placeholder="How can we help?" required></textarea><span class="error-msg">Please enter a message</span></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+    </form>
+  </div>
+</div>
 
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-            dots.forEach(dot => {
-                dot.classList.remove('active');
-            });
+<!-- BOOKING MODAL -->
+<div id="bookingModal" class="modal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="close" onclick="closeBooking()" aria-label="Close">×</button>
+    <h2>Book a Performance</h2>
+    <span class="modal-subtitle">Tell us about your event</span>
+    <div id="bookingSuccess" class="form-success">
+      <div class="success-icon">🎤</div>
+      <h3>Booking Request Sent!</h3>
+      <p>We've received your request and will confirm availability within 48 hours.</p>
+    </div>
+    <form id="bookingForm" novalidate>
+      <div class="form-group" id="fg-bname"><label for="b-name">Your Name</label><input type="text" id="b-name" name="name" placeholder="Your name" required><span class="error-msg">Please enter your name</span></div>
+      <div class="form-group" id="fg-bemail"><label for="b-email">Email</label><input type="email" id="b-email" name="email" placeholder="your@email.com" required><span class="error-msg">Please enter a valid email</span></div>
+      <div class="form-group" id="fg-event"><label for="b-event">Event Type</label><input type="text" id="b-event" name="event" placeholder="Wedding, Festival, Corporate..." required><span class="error-msg">Please enter the event type</span></div>
+      <div class="form-group" id="fg-date"><label for="b-date">Preferred Date</label><input type="date" id="b-date" name="date" required><span class="error-msg">Please select a date</span></div>
+      <div class="form-group" id="fg-venue"><label for="b-venue">Venue</label><input type="text" id="b-venue" name="venue" placeholder="City, Venue name..." required><span class="error-msg">Please enter the venue</span></div>
+      <div class="form-group"><label for="b-details">Additional Details</label><textarea id="b-details" name="details" placeholder="Expected audience, duration, requirements..."></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Submit Booking Request</button>
+    </form>
+  </div>
+</div>
 
-            slides[currentSlideIndex - 1].classList.add('active');
-            dots[currentSlideIndex - 1].classList.add('active');
-        }
-
-        function openModal(imageSrc) {
-            const modal = document.getElementById('galleryModal');
-            const modalImage = document.getElementById('modalImage');
-            modalImage.src = imageSrc;
-            modal.style.display = 'block';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('galleryModal');
-            modal.style.display = 'none';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('galleryModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
-            if (e.key === 'Escape') closeModal();
-        });
-    </script>
+<div id="legalModal" class="legal-modal" role="dialog" aria-modal="true">
+  <div class="legal-content">
+    <button class="close" onclick="closeLegal()" aria-label="Close" style="position:absolute;top:16px;right:20px;">×</button>
+    <div id="legalInner"></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="alert"></div>
+<script src="script.js"></script>
 </body>
 </html>
